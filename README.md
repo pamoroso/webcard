@@ -6,7 +6,7 @@ WebCard is a NoteCards extension for visiting websites. It opens sites on the Wo
 
 The project is one of the entrants of the [RetroChallenge 2024](https://www.retrochallenge.org/2024/08/rc202410-registration-is-open.html). Follow the [project blog](https://journal.paoloamoroso.com/tag:WebCard) and the [status updates](https://fosstodon.org/@amoroso/tagged/RC2024).
 
-WebCard is written in Interlisp as an extension of the [NoteCards](https://en.wikipedia.org/wiki/NoteCards) hypermedia system of the [Medley Interlisp](https://interlisp.org).
+WebCard is written in Interlisp as an extension of the [NoteCards](https://en.wikipedia.org/wiki/NoteCards) hypermedia system of [Medley Interlisp](https://interlisp.org).
 
 
 ## Learn more

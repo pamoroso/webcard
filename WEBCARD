@@ -1,0 +1,44 @@
+(DEFINE-FILE-INFO PACKAGE "INTERLISP" READTABLE "INTERLISP" BASE 10)
+
+(FILECREATED " 1-Oct-2024 17:56:57" {DSK}<home>paolo>il>webcard>WEBCARD.;2 1621   
+
+      :EDIT-BY "PA"
+
+      :CHANGES-TO (FNS WCD.CreateWebCardType WCD.MakeWebCard)
+                  (VARS WEBCARDCOMS)
+
+      :PREVIOUS-DATE " 1-Oct-2024 14:33:52" {DSK}<home>paolo>il>webcard>WEBCARD.;1)
+
+
+(PRETTYCOMPRINT WEBCARDCOMS)
+
+(RPAQQ WEBCARDCOMS ((FNS WCD.CreateWebCardType WCD.MakeWebCard)
+                    (P (WCD.CreateWebCardType))))
+(DEFINEQ
+
+(WCD.CreateWebCardType
+  [LAMBDA NIL                                                (* ; "Edited  1-Oct-2024 17:35 by PA")
+                                                             (* Define the new card type Web that 
+                                                             inherits from Text.)
+    (NCP.CreateCardType 'Web 'Text '((MakeFn WCD.MakeWebCard))
+           `((LinkAnchorModesSupported NIL)
+             (DisplayedInMenuFlg T])
+
+(WCD.MakeWebCard
+  [LAMBDA (Card Title NoDisplayFlg)                          (* ; "Edited  1-Oct-2024 17:51 by PA")
+
+         (* Make a new card of type Web. Return the window of the new card if NoDisplayFlg 
+         is non-NIL, and the ID if NoDisplayFlg is NIL.)
+
+    (if (NOT NoDisplayFlg)
+        then (LET ((ReturnValue (APPLY* (NCP.CardTypeFn 'Web 'MakeFn)
+                                       Card Title NoDisplayFlg)))
+                  (PROMPTPRINT "Creating new Web card...")
+                  ReturnValue)
+      else Card])
+)
+
+(WCD.CreateWebCardType)
+(DECLARE%: DONTCOPY
+  (FILEMAP (NIL (518 1569 (WCD.CreateWebCardType 528 . 995) (WCD.MakeWebCard 997 . 1567)))))
+STOP

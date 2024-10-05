@@ -1,12 +1,12 @@
 (DEFINE-FILE-INFO PACKAGE "INTERLISP" READTABLE "INTERLISP" BASE 10)
 
-(FILECREATED " 4-Oct-2024 18:46:40" {DSK}<home>paolo>il>webcard>WEBCARD.;5 3369   
+(FILECREATED " 5-Oct-2024 19:51:26" {DSK}<home>paolo>il>webcard>WEBCARD.;6 3458   
 
       :EDIT-BY "PA"
 
       :CHANGES-TO (FNS WCD.TraverseWebLink)
 
-      :PREVIOUS-DATE " 4-Oct-2024 17:20:44" {DSK}<home>paolo>il>webcard>WEBCARD.;4)
+      :PREVIOUS-DATE " 4-Oct-2024 18:46:40" {DSK}<home>paolo>il>webcard>WEBCARD.;5)
 
 
 (PRETTYCOMPRINT WEBCARDCOMS)
@@ -57,23 +57,25 @@
            Card])
 
 (WCD.TraverseWebLink
-  [LAMBDA (Card Window)                                      (* ; "Edited  4-Oct-2024 18:43 by PA")
+  [LAMBDA (Card Window)                                      (* ; "Edited  5-Oct-2024 19:50 by PA")
+                                                             (* ; "Edited  4-Oct-2024 18:43 by PA")
 
          (* Open in the system web browser the URL associated with the destination Web 
-         Card. Also opens the card and returns the same value of NC.TraverseLink, to which 
-         the Window containing the link icon is passed.)
+         Card. Also opens the card and returns it.
+         The Window containing the link icon is ignored.)
 
     (AND (NCP.ValidCardP Card)
          (LET [(URL (NCP.CardProp Card 'URL]
               (if URL
                   then (NCP.OpenCard Card)
-                       (ShellBrowse URL])
+                       (ShellBrowse URL))
+              Card])
 )
 
 (WCD.CreateWebCardType)
 
 (PUTPROPS Web LinkIconLeftButtonFn WCD.TraverseWebLink)
 (DECLARE%: DONTCOPY
-  (FILEMAP (NIL (672 3252 (WCD.AskURL 682 . 1340) (WCD.CreateWebCardType 1342 . 1809) (WCD.MakeWebCard 
-1811 . 2674) (WCD.TraverseWebLink 2676 . 3250)))))
+  (FILEMAP (NIL (672 3341 (WCD.AskURL 682 . 1340) (WCD.CreateWebCardType 1342 . 1809) (WCD.MakeWebCard 
+1811 . 2674) (WCD.TraverseWebLink 2676 . 3339)))))
 STOP

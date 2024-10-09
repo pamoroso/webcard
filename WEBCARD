@@ -1,19 +1,20 @@
 (DEFINE-FILE-INFO PACKAGE "INTERLISP" READTABLE "INTERLISP" BASE 10)
 
-(FILECREATED " 9-Oct-2024 14:14:22" {DSK}<home>paolo>il>webcard>WEBCARD.;8 5161   
+(FILECREATED " 9-Oct-2024 17:17:45" {DSK}<home>paolo>il>webcard>WEBCARD.;9 5598   
 
       :EDIT-BY "PA"
 
-      :CHANGES-TO (FNS WCD.AskURL WCD.MakeWebCard)
+      :CHANGES-TO (FNS WCD.AskURL WCD.TraverseWebLink WCD.VisitURL)
+                  (VARS WEBCARDCOMS)
 
-      :PREVIOUS-DATE " 7-Oct-2024 13:24:07" {DSK}<home>paolo>il>webcard>WEBCARD.;7)
+      :PREVIOUS-DATE " 9-Oct-2024 14:14:22" {DSK}<home>paolo>il>webcard>WEBCARD.;8)
 
 
 (PRETTYCOMPRINT WEBCARDCOMS)
 
 (RPAQQ WEBCARDCOMS ((* A NoteCards extension for visiting websites.)
                     (FNS WCD.AskURL WCD.CreateWebCardType WCD.MakeWebCard WCD.TraverseWebLink 
-                         WCD.ValidURLP)
+                         WCD.ValidURLP WCD.VisitURL)
                     (P (WCD.CreateWebCardType))
                     (PROP LinkIconLeftButtonFn Web)))
 
@@ -24,7 +25,7 @@
 (DEFINEQ
 
 (WCD.AskURL
-  [LAMBDA (MainWindow Default)                               (* ; "Edited  9-Oct-2024 14:13 by PA")
+  [LAMBDA (MainWindow Default)                               (* ; "Edited  9-Oct-2024 16:50 by PA")
                                                              (* ; "Edited  3-Oct-2024 14:00 by PA")
 
          (* Ask for a URL in a dialog attached to MainWindow and return the URL.
@@ -32,10 +33,10 @@
          If MainWindow is NIL then the top level prompt window is used.)
                                                              (* TODO Do at least some URL 
                                                              validation.)
-    (bind (URL _ NIL) until URL do (SETQ URL (NCP.AskUser "Enter URL" ": "
+    (bind (URL _ NIL) until URL do (SETQ URL (NCP.AskUser "Enter full URL" ": "
                                                     (if Default
                                                         then Default
-                                                      else "https://")
+                                                      else "")
                                                     T MainWindow NIL NIL T))
        finally (RETURN URL])
 
@@ -67,19 +68,17 @@
            Card])
 
 (WCD.TraverseWebLink
-  [LAMBDA (Card Window)                                      (* ; "Edited  5-Oct-2024 19:50 by PA")
+  [LAMBDA (Card Window)                                      (* ; "Edited  9-Oct-2024 17:16 by PA")
+                                                             (* ; "Edited  5-Oct-2024 19:50 by PA")
                                                              (* ; "Edited  4-Oct-2024 18:43 by PA")
 
          (* Open in the system web browser the URL associated with the destination Web 
          Card. Also opens the card and returns it.
          The Window containing the link icon is ignored.)
 
-    (AND (NCP.ValidCardP Card)
-         (LET [(URL (NCP.CardProp Card 'URL]
-              (if URL
-                  then (NCP.OpenCard Card)
-                       (ShellBrowse URL))
-              Card])
+    (if (NCP.ValidCardP Card)
+        then (NCP.OpenCard Card)
+             (WCD.VisitURL Card])
 
 (WCD.ValidURLP
   [LAMBDA (String)                                           (* ; "Edited  7-Oct-2024 13:21 by PA")
@@ -103,12 +102,23 @@
                                 (GREATERP Length 7]
              then String
            else NIL])
+
+(WCD.VisitURL
+  [LAMBDA (Card)                                             (* ; "Edited  9-Oct-2024 17:15 by PA")
+
+         (* Visit the URL associated with Card. Commands the browser to of the host 
+         operating system to open the URL.)
+
+    (LET [(URL (NCP.CardProp Card 'URL]
+         (if URL
+             then (ShellBrowse URL])
 )
 
 (WCD.CreateWebCardType)
 
 (PUTPROPS Web LinkIconLeftButtonFn WCD.TraverseWebLink)
 (DECLARE%: DONTCOPY
-  (FILEMAP (NIL (719 5044 (WCD.AskURL 729 . 1774) (WCD.CreateWebCardType 1776 . 2243) (WCD.MakeWebCard 
-2245 . 3301) (WCD.TraverseWebLink 3303 . 3966) (WCD.ValidURLP 3968 . 5042)))))
+  (FILEMAP (NIL (786 5481 (WCD.AskURL 796 . 1838) (WCD.CreateWebCardType 1840 . 2307) (WCD.MakeWebCard 
+2309 . 3365) (WCD.TraverseWebLink 3367 . 4035) (WCD.ValidURLP 4037 . 5111) (WCD.VisitURL 5113 . 5479))
+)))
 STOP

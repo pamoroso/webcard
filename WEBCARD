@@ -1,18 +1,20 @@
 (DEFINE-FILE-INFO PACKAGE "INTERLISP" READTABLE "INTERLISP" BASE 10)
 
-(FILECREATED " 5-Oct-2024 19:51:26" {DSK}<home>paolo>il>webcard>WEBCARD.;6 3458   
+(FILECREATED " 7-Oct-2024 13:24:07" {DSK}<home>paolo>il>webcard>WEBCARD.;7 4605   
 
       :EDIT-BY "PA"
 
-      :CHANGES-TO (FNS WCD.TraverseWebLink)
+      :CHANGES-TO (VARS WEBCARDCOMS)
+                  (FNS WCD.ValidURLP)
 
-      :PREVIOUS-DATE " 4-Oct-2024 18:46:40" {DSK}<home>paolo>il>webcard>WEBCARD.;5)
+      :PREVIOUS-DATE " 5-Oct-2024 19:51:26" {DSK}<home>paolo>il>webcard>WEBCARD.;6)
 
 
 (PRETTYCOMPRINT WEBCARDCOMS)
 
 (RPAQQ WEBCARDCOMS ((* A NoteCards extension for visiting websites.)
-                    (FNS WCD.AskURL WCD.CreateWebCardType WCD.MakeWebCard WCD.TraverseWebLink)
+                    (FNS WCD.AskURL WCD.CreateWebCardType WCD.MakeWebCard WCD.TraverseWebLink 
+                         WCD.ValidURLP)
                     (P (WCD.CreateWebCardType))
                     (PROP LinkIconLeftButtonFn Web)))
 
@@ -70,12 +72,35 @@
                   then (NCP.OpenCard Card)
                        (ShellBrowse URL))
               Card])
+
+(WCD.ValidURLP
+  [LAMBDA (String)                                           (* ; "Edited  7-Oct-2024 13:21 by PA")
+
+         (* Return String if it is a valid URL, NIL otherwise.
+         A URL is valid if it is not null, contains no spaces or tabs, and starts with 
+         https%://, http%://, or mailto%:.)
+
+    (LET ((LowerString (L-CASE String)))
+         (if [AND LowerString (STRINGP LowerString)
+                  (NOT (STRPOS " " LowerString))
+                  (LET ((Length (NCHARS LowerString)))
+                       (OR (AND (EQP (STRPOS "https://" LowerString)
+                                     1)
+                                (GREATERP Length 8))
+                           (AND (EQP (STRPOS "http://" LowerString)
+                                     1)
+                                (GREATERP Length 7))
+                           (AND (EQP (STRPOS "mailto:" LowerString)
+                                     1)
+                                (GREATERP Length 7]
+             then String
+           else NIL])
 )
 
 (WCD.CreateWebCardType)
 
 (PUTPROPS Web LinkIconLeftButtonFn WCD.TraverseWebLink)
 (DECLARE%: DONTCOPY
-  (FILEMAP (NIL (672 3341 (WCD.AskURL 682 . 1340) (WCD.CreateWebCardType 1342 . 1809) (WCD.MakeWebCard 
-1811 . 2674) (WCD.TraverseWebLink 2676 . 3339)))))
+  (FILEMAP (NIL (743 4488 (WCD.AskURL 753 . 1411) (WCD.CreateWebCardType 1413 . 1880) (WCD.MakeWebCard 
+1882 . 2745) (WCD.TraverseWebLink 2747 . 3410) (WCD.ValidURLP 3412 . 4486)))))
 STOP

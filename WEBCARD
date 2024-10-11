@@ -1,21 +1,21 @@
 (DEFINE-FILE-INFO PACKAGE "INTERLISP" READTABLE "INTERLISP" BASE 10)
 
-(FILECREATED " 9-Oct-2024 17:17:45" {DSK}<home>paolo>il>webcard>WEBCARD.;9 5598   
+(FILECREATED "11-Oct-2024 14:08:55" {DSK}<home>paolo>il>webcard>WEBCARD.;10 5837   
 
       :EDIT-BY "PA"
 
-      :CHANGES-TO (FNS WCD.AskURL WCD.TraverseWebLink WCD.VisitURL)
-                  (VARS WEBCARDCOMS)
+      :CHANGES-TO (VARS WEBCARDCOMS)
+                  (FNS WCD.InitWebCard)
 
-      :PREVIOUS-DATE " 9-Oct-2024 14:14:22" {DSK}<home>paolo>il>webcard>WEBCARD.;8)
+      :PREVIOUS-DATE " 9-Oct-2024 17:17:45" {DSK}<home>paolo>il>webcard>WEBCARD.;9)
 
 
 (PRETTYCOMPRINT WEBCARDCOMS)
 
 (RPAQQ WEBCARDCOMS ((* A NoteCards extension for visiting websites.)
-                    (FNS WCD.AskURL WCD.CreateWebCardType WCD.MakeWebCard WCD.TraverseWebLink 
-                         WCD.ValidURLP WCD.VisitURL)
-                    (P (WCD.CreateWebCardType))
+                    (FNS WCD.AskURL WCD.CreateWebCardType WCD.InitWebCard WCD.MakeWebCard 
+                         WCD.TraverseWebLink WCD.ValidURLP WCD.VisitURL)
+                    (P (WCD.InitWebCard))
                     (PROP LinkIconLeftButtonFn Web)))
 
 
@@ -47,6 +47,11 @@
     (NCP.CreateCardType 'Web 'Text '((MakeFn WCD.MakeWebCard))
            `((LinkAnchorModesSupported NIL)
              (DisplayedInMenuFlg T])
+
+(WCD.InitWebCard
+  [LAMBDA NIL                                                (* ; "Edited 11-Oct-2024 14:07 by PA")
+                                                             (* Initialize the Web card type.)
+    (WCD.CreateWebCardType])
 
 (WCD.MakeWebCard
   [LAMBDA (Card Title NoDisplayFlg)                          (* ; "Edited  9-Oct-2024 14:08 by PA")
@@ -114,11 +119,11 @@
              then (ShellBrowse URL])
 )
 
-(WCD.CreateWebCardType)
+(WCD.InitWebCard)
 
 (PUTPROPS Web LinkIconLeftButtonFn WCD.TraverseWebLink)
 (DECLARE%: DONTCOPY
-  (FILEMAP (NIL (786 5481 (WCD.AskURL 796 . 1838) (WCD.CreateWebCardType 1840 . 2307) (WCD.MakeWebCard 
-2309 . 3365) (WCD.TraverseWebLink 3367 . 4035) (WCD.ValidURLP 4037 . 5111) (WCD.VisitURL 5113 . 5479))
-)))
+  (FILEMAP (NIL (769 5726 (WCD.AskURL 779 . 1821) (WCD.CreateWebCardType 1823 . 2290) (WCD.InitWebCard 
+2292 . 2552) (WCD.MakeWebCard 2554 . 3610) (WCD.TraverseWebLink 3612 . 4280) (WCD.ValidURLP 4282 . 
+5356) (WCD.VisitURL 5358 . 5724)))))
 STOP

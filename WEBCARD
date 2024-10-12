@@ -1,20 +1,21 @@
 (DEFINE-FILE-INFO PACKAGE "INTERLISP" READTABLE "INTERLISP" BASE 10)
 
-(FILECREATED "12-Oct-2024 17:55:38" {DSK}<home>paolo>il>webcard>WEBCARD.;13 7730   
+(FILECREATED "12-Oct-2024 19:33:33" {DSK}<home>paolo>il>webcard>WEBCARD.;14 7989   
 
       :EDIT-BY "PA"
 
-      :CHANGES-TO (FNS WCD.EditURLMenuCmd WCD.MakeWebCard)
+      :CHANGES-TO (FNS WCD.EditURLMenuCmd WCD.MakeWebCard WCD.UpdateCardText)
+                  (VARS WEBCARDCOMS)
 
-      :PREVIOUS-DATE "11-Oct-2024 18:35:15" {DSK}<home>paolo>il>webcard>WEBCARD.;12)
+      :PREVIOUS-DATE "12-Oct-2024 17:55:38" {DSK}<home>paolo>il>webcard>WEBCARD.;13)
 
 
 (PRETTYCOMPRINT WEBCARDCOMS)
 
 (RPAQQ WEBCARDCOMS ((* A NoteCards extension for visiting websites.)
                     (FNS WCD.AskURL WCD.CreateWebCardType WCD.EditURLMenuCmd WCD.InitWebCard 
-                         WCD.MakeWebCard WCD.TraverseWebLink WCD.ValidURLP WCD.VisitURL 
-                         WCD.VisitURLMenuCmd)
+                         WCD.MakeWebCard WCD.TraverseWebLink WCD.UpdateCardText WCD.ValidURLP 
+                         WCD.VisitURL WCD.VisitURLMenuCmd)
                     (P (WCD.InitWebCard))
                     (PROP LinkIconLeftButtonFn Web)))
 
@@ -49,23 +50,15 @@
              (DisplayedInMenuFlg T])
 
 (WCD.EditURLMenuCmd
-  [LAMBDA (Window)                                           (* ; "Edited 12-Oct-2024 17:53 by PA")
+  [LAMBDA (Window)                                           (* ; "Edited 12-Oct-2024 19:32 by PA")
 
          (* Edit the URL associated with the card when the user selects the relevant 
          option of the card's left-click menu.)
 
-    (LET* ((Card (NCP.CoerceToCard Window))
-           (TEXTSTREAM (NCP.CardSubstance Card)))
-          [NCP.CardProp Card 'URL (WCD.AskURL Window (NCP.CardProp Card 'URL]
-
-         (* Set the card text to read-write, clear the existing URL insert the new URL, 
-         and make the text read only again,)
-
-          (TEXTPROP TEXTSTREAM 'READONLY NIL)                (* Clear card text.)
-          (TEDIT.DELETE TEXTSTREAM 1 (TEDIT.NCHARS TEXTSTREAM))
-          (NCP.CardAddText Card (NCP.CardProp Card 'URL)
-                 'END)
-          (TEXTPROP TEXTSTREAM 'READONLY T])
+    (LET* [(Card (NCP.CoerceToCard Window))
+           (URL (WCD.AskURL Window (NCP.CardProp Card 'URL]
+          (NCP.CardProp Card 'URL URL)
+          (WCD.UpdateCardText Card URL])
 
 (WCD.InitWebCard
   [LAMBDA NIL                                                (* ; "Edited 11-Oct-2024 18:22 by PA")
@@ -78,7 +71,7 @@
            'Top])
 
 (WCD.MakeWebCard
-  [LAMBDA (Card Title NoDisplayFlg)                          (* ; "Edited 12-Oct-2024 17:49 by PA")
+  [LAMBDA (Card Title NoDisplayFlg)                          (* ; "Edited 12-Oct-2024 19:22 by PA")
                                                              (* ; "Edited  9-Oct-2024 14:08 by PA")
                                                              (* ; "Edited  3-Oct-2024 13:58 by PA")
                                                              (* ; "Edited  1-Oct-2024 17:51 by PA")
@@ -91,9 +84,7 @@
                     (URL (WCD.AskURL Window)))
                    (NCP.CardProp Card 'URL URL)
                    (NCP.CardTitle Card "Untitled")
-                   (NCP.CardAddText Card URL 'END)           (* Make card text read only.)
-                   (TEXTPROP (NCP.CardSubstance Card)
-                          'READONLY T)
+                   (WCD.UpdateCardText Card URL)
                    Window)
       else (NCP.CardProp Card 'URL (WCD.AskURL))             (* TODO More Text card initialization 
                                                              here.)
@@ -111,6 +102,19 @@
     (if (NCP.ValidCardP Card)
         then (NCP.OpenCard Card)
              (WCD.VisitURL Card])
+
+(WCD.UpdateCardText
+  [LAMBDA (Card NewText)                                     (* ; "Edited 12-Oct-2024 19:26 by PA")
+                                                             (* Replace the Card text with NewText.)
+    (LET ((TEXTSTREAM (NCP.CardSubstance Card)))
+
+         (* Set the card text to read-write, clear the existing text, insert the new text, 
+         and make the text read only again,)
+
+         (TEXTPROP TEXTSTREAM 'READONLY NIL)                 (* Clear card text.)
+         (TEDIT.DELETE TEXTSTREAM 1 (TEDIT.NCHARS TEXTSTREAM))
+         (NCP.CardAddText Card URL 'END)                     (* Make card text read only.)
+         (TEXTPROP TEXTSTREAM 'READONLY T])
 
 (WCD.ValidURLP
   [LAMBDA (String)                                           (* ; "Edited  7-Oct-2024 13:21 by PA")
@@ -158,8 +162,8 @@
 
 (PUTPROPS Web LinkIconLeftButtonFn WCD.TraverseWebLink)
 (DECLARE%: DONTCOPY
-  (FILEMAP (NIL (817 7619 (WCD.AskURL 827 . 1869) (WCD.CreateWebCardType 1871 . 2338) (
-WCD.EditURLMenuCmd 2340 . 3210) (WCD.InitWebCard 3212 . 3872) (WCD.MakeWebCard 3874 . 5175) (
-WCD.TraverseWebLink 5177 . 5845) (WCD.ValidURLP 5847 . 6921) (WCD.VisitURL 6923 . 7289) (
-WCD.VisitURLMenuCmd 7291 . 7617)))))
+  (FILEMAP (NIL (892 7878 (WCD.AskURL 902 . 1944) (WCD.CreateWebCardType 1946 . 2413) (
+WCD.EditURLMenuCmd 2415 . 2882) (WCD.InitWebCard 2884 . 3544) (WCD.MakeWebCard 3546 . 4712) (
+WCD.TraverseWebLink 4714 . 5382) (WCD.UpdateCardText 5384 . 6104) (WCD.ValidURLP 6106 . 7180) (
+WCD.VisitURL 7182 . 7548) (WCD.VisitURLMenuCmd 7550 . 7876)))))
 STOP

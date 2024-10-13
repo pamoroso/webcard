@@ -1,12 +1,12 @@
 (DEFINE-FILE-INFO PACKAGE "INTERLISP" READTABLE "INTERLISP" BASE 10)
 
-(FILECREATED "13-Oct-2024 10:55:25" {DSK}<home>paolo>il>webcard>WEBCARD.;15 8389   
+(FILECREATED "13-Oct-2024 17:00:49" {DSK}<home>paolo>il>webcard>WEBCARD.;16 8388   
 
       :EDIT-BY "PA"
 
-      :CHANGES-TO (FNS WCD.TraverseWebLink)
+      :CHANGES-TO (FNS WCD.UpdateCardText)
 
-      :PREVIOUS-DATE "12-Oct-2024 19:33:33" {DSK}<home>paolo>il>webcard>WEBCARD.;14)
+      :PREVIOUS-DATE "13-Oct-2024 10:55:25" {DSK}<home>paolo>il>webcard>WEBCARD.;15)
 
 
 (PRETTYCOMPRINT WEBCARDCOMS)
@@ -111,17 +111,17 @@
              (WCD.VisitURL Card])
 
 (WCD.UpdateCardText
-  [LAMBDA (Card NewText)                                     (* ; "Edited 12-Oct-2024 19:26 by PA")
+  [LAMBDA (Card NewText)                                     (* ; "Edited 13-Oct-2024 16:59 by PA")
                                                              (* Replace the Card text with NewText.)
-    (LET ((TEXTSTREAM (NCP.CardSubstance Card)))
+    (LET ((TextStream (NCP.CardSubstance Card)))
 
          (* Set the card text to read-write, clear the existing text, insert the new text, 
          and make the text read only again,)
 
-         (TEXTPROP TEXTSTREAM 'READONLY NIL)                 (* Clear card text.)
-         (TEDIT.DELETE TEXTSTREAM 1 (TEDIT.NCHARS TEXTSTREAM))
+         (TEXTPROP TextStream 'READONLY NIL)                 (* Clear card text.)
+         (TEDIT.DELETE TextStream 1 (TEDIT.NCHARS TextStream))
          (NCP.CardAddText Card URL 'END)                     (* Make card text read only.)
-         (TEXTPROP TEXTSTREAM 'READONLY T])
+         (TEXTPROP TextStream 'READONLY T])
 
 (WCD.ValidURLP
   [LAMBDA (String)                                           (* ; "Edited  7-Oct-2024 13:21 by PA")
@@ -169,8 +169,8 @@
 
 (PUTPROPS Web LinkIconLeftButtonFn WCD.TraverseWebLink)
 (DECLARE%: DONTCOPY
-  (FILEMAP (NIL (821 8278 (WCD.AskURL 831 . 1873) (WCD.CreateWebCardType 1875 . 2342) (
-WCD.EditURLMenuCmd 2344 . 2811) (WCD.InitWebCard 2813 . 3473) (WCD.MakeWebCard 3475 . 4641) (
-WCD.TraverseWebLink 4643 . 5782) (WCD.UpdateCardText 5784 . 6504) (WCD.ValidURLP 6506 . 7580) (
-WCD.VisitURL 7582 . 7948) (WCD.VisitURLMenuCmd 7950 . 8276)))))
+  (FILEMAP (NIL (820 8277 (WCD.AskURL 830 . 1872) (WCD.CreateWebCardType 1874 . 2341) (
+WCD.EditURLMenuCmd 2343 . 2810) (WCD.InitWebCard 2812 . 3472) (WCD.MakeWebCard 3474 . 4640) (
+WCD.TraverseWebLink 4642 . 5781) (WCD.UpdateCardText 5783 . 6503) (WCD.ValidURLP 6505 . 7579) (
+WCD.VisitURL 7581 . 7947) (WCD.VisitURLMenuCmd 7949 . 8275)))))
 STOP

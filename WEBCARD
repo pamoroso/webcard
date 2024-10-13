@@ -1,13 +1,12 @@
 (DEFINE-FILE-INFO PACKAGE "INTERLISP" READTABLE "INTERLISP" BASE 10)
 
-(FILECREATED "12-Oct-2024 19:33:33" {DSK}<home>paolo>il>webcard>WEBCARD.;14 7989   
+(FILECREATED "13-Oct-2024 10:55:25" {DSK}<home>paolo>il>webcard>WEBCARD.;15 8389   
 
       :EDIT-BY "PA"
 
-      :CHANGES-TO (FNS WCD.EditURLMenuCmd WCD.MakeWebCard WCD.UpdateCardText)
-                  (VARS WEBCARDCOMS)
+      :CHANGES-TO (FNS WCD.TraverseWebLink)
 
-      :PREVIOUS-DATE "12-Oct-2024 17:55:38" {DSK}<home>paolo>il>webcard>WEBCARD.;13)
+      :PREVIOUS-DATE "12-Oct-2024 19:33:33" {DSK}<home>paolo>il>webcard>WEBCARD.;14)
 
 
 (PRETTYCOMPRINT WEBCARDCOMS)
@@ -91,7 +90,8 @@
            Card])
 
 (WCD.TraverseWebLink
-  [LAMBDA (Card Window)                                      (* ; "Edited  9-Oct-2024 17:16 by PA")
+  [LAMBDA (Card Window)                                      (* ; "Edited 13-Oct-2024 10:55 by PA")
+                                                             (* ; "Edited  9-Oct-2024 17:16 by PA")
                                                              (* ; "Edited  5-Oct-2024 19:50 by PA")
                                                              (* ; "Edited  4-Oct-2024 18:43 by PA")
 
@@ -100,7 +100,14 @@
          The Window containing the link icon is ignored.)
 
     (if (NCP.ValidCardP Card)
-        then (NCP.OpenCard Card)
+        then (NCP.OpenCard Card) 
+
+         (* Make card text read only. Notefiles don't preserve the read only state which 
+         is a runtime property, so this is necessary for not yet opened cards from newly 
+         loaded notefiles. To catch this the first link traversal triggers read only.)
+
+             (TEXTPROP (NCP.CardSubstance Card)
+                    'READONLY T)
              (WCD.VisitURL Card])
 
 (WCD.UpdateCardText
@@ -162,8 +169,8 @@
 
 (PUTPROPS Web LinkIconLeftButtonFn WCD.TraverseWebLink)
 (DECLARE%: DONTCOPY
-  (FILEMAP (NIL (892 7878 (WCD.AskURL 902 . 1944) (WCD.CreateWebCardType 1946 . 2413) (
-WCD.EditURLMenuCmd 2415 . 2882) (WCD.InitWebCard 2884 . 3544) (WCD.MakeWebCard 3546 . 4712) (
-WCD.TraverseWebLink 4714 . 5382) (WCD.UpdateCardText 5384 . 6104) (WCD.ValidURLP 6106 . 7180) (
-WCD.VisitURL 7182 . 7548) (WCD.VisitURLMenuCmd 7550 . 7876)))))
+  (FILEMAP (NIL (821 8278 (WCD.AskURL 831 . 1873) (WCD.CreateWebCardType 1875 . 2342) (
+WCD.EditURLMenuCmd 2344 . 2811) (WCD.InitWebCard 2813 . 3473) (WCD.MakeWebCard 3475 . 4641) (
+WCD.TraverseWebLink 4643 . 5782) (WCD.UpdateCardText 5784 . 6504) (WCD.ValidURLP 6506 . 7580) (
+WCD.VisitURL 7582 . 7948) (WCD.VisitURLMenuCmd 7950 . 8276)))))
 STOP

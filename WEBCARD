@@ -1,12 +1,12 @@
 (DEFINE-FILE-INFO PACKAGE "INTERLISP" READTABLE "INTERLISP" BASE 10)
 
-(FILECREATED "13-Oct-2024 17:00:49" {DSK}<home>paolo>il>webcard>WEBCARD.;16 8388   
+(FILECREATED "13-Oct-2024 18:01:00" {DSK}<home>paolo>il>webcard>WEBCARD.;17 8826   
 
       :EDIT-BY "PA"
 
-      :CHANGES-TO (FNS WCD.UpdateCardText)
+      :CHANGES-TO (FNS WCD.AskURL)
 
-      :PREVIOUS-DATE "13-Oct-2024 10:55:25" {DSK}<home>paolo>il>webcard>WEBCARD.;15)
+      :PREVIOUS-DATE "13-Oct-2024 17:00:49" {DSK}<home>paolo>il>webcard>WEBCARD.;16)
 
 
 (PRETTYCOMPRINT WEBCARDCOMS)
@@ -25,19 +25,25 @@
 (DEFINEQ
 
 (WCD.AskURL
-  [LAMBDA (MainWindow Default)                               (* ; "Edited  9-Oct-2024 16:50 by PA")
+  [LAMBDA (MainWindow Default)                               (* ; "Edited 13-Oct-2024 17:59 by PA")
+                                                             (* ; "Edited  9-Oct-2024 16:50 by PA")
                                                              (* ; "Edited  3-Oct-2024 14:00 by PA")
 
          (* Ask for a URL in a dialog attached to MainWindow and return the URL.
-         Provides Default a s URL prefix that can be edited.
+         Provides Default as a URL prefix that can be edited.
          If MainWindow is NIL then the top level prompt window is used.)
-                                                             (* TODO Do at least some URL 
-                                                             validation.)
-    (bind (URL _ NIL) until URL do (SETQ URL (NCP.AskUser "Enter full URL" ": "
-                                                    (if Default
-                                                        then Default
-                                                      else "")
-                                                    T MainWindow NIL NIL T))
+
+    (bind (URL _ NIL)
+          (ValidURLP _ NIL) until ValidURLP do (SETQ URL (NCP.AskUser "Enter full URL" ": "
+                                                                (if Default
+                                                                    then Default
+                                                                  else "")
+                                                                NIL MainWindow NIL NIL T))
+                                               (if (WCD.ValidURLP URL)
+                                                   then (SETQ ValidURLP T)
+                                                 else (NCP.PrintMsg MainWindow NIL (CHARACTER 13)
+                                                             "Invalid URL, try again."
+                                                             (CHARACTER 13)))
        finally (RETURN URL])
 
 (WCD.CreateWebCardType
@@ -169,8 +175,8 @@
 
 (PUTPROPS Web LinkIconLeftButtonFn WCD.TraverseWebLink)
 (DECLARE%: DONTCOPY
-  (FILEMAP (NIL (820 8277 (WCD.AskURL 830 . 1872) (WCD.CreateWebCardType 1874 . 2341) (
-WCD.EditURLMenuCmd 2343 . 2810) (WCD.InitWebCard 2812 . 3472) (WCD.MakeWebCard 3474 . 4640) (
-WCD.TraverseWebLink 4642 . 5781) (WCD.UpdateCardText 5783 . 6503) (WCD.ValidURLP 6505 . 7579) (
-WCD.VisitURL 7581 . 7947) (WCD.VisitURLMenuCmd 7949 . 8275)))))
+  (FILEMAP (NIL (812 8715 (WCD.AskURL 822 . 2310) (WCD.CreateWebCardType 2312 . 2779) (
+WCD.EditURLMenuCmd 2781 . 3248) (WCD.InitWebCard 3250 . 3910) (WCD.MakeWebCard 3912 . 5078) (
+WCD.TraverseWebLink 5080 . 6219) (WCD.UpdateCardText 6221 . 6941) (WCD.ValidURLP 6943 . 8017) (
+WCD.VisitURL 8019 . 8385) (WCD.VisitURLMenuCmd 8387 . 8713)))))
 STOP

@@ -1,12 +1,12 @@
 (DEFINE-FILE-INFO PACKAGE "INTERLISP" READTABLE "INTERLISP" BASE 10)
 
-(FILECREATED "13-Oct-2024 18:01:00" {DSK}<home>paolo>il>webcard>WEBCARD.;17 8826   
+(FILECREATED "13-Oct-2024 19:00:15" {DSK}<home>paolo>il>webcard>WEBCARD.;18 8973   
 
       :EDIT-BY "PA"
 
       :CHANGES-TO (FNS WCD.AskURL)
 
-      :PREVIOUS-DATE "13-Oct-2024 17:00:49" {DSK}<home>paolo>il>webcard>WEBCARD.;16)
+      :PREVIOUS-DATE "13-Oct-2024 18:01:00" {DSK}<home>paolo>il>webcard>WEBCARD.;17)
 
 
 (PRETTYCOMPRINT WEBCARDCOMS)
@@ -25,7 +25,7 @@
 (DEFINEQ
 
 (WCD.AskURL
-  [LAMBDA (MainWindow Default)                               (* ; "Edited 13-Oct-2024 17:59 by PA")
+  [LAMBDA (MainWindow Default)                               (* ; "Edited 13-Oct-2024 18:59 by PA")
                                                              (* ; "Edited  9-Oct-2024 16:50 by PA")
                                                              (* ; "Edited  3-Oct-2024 14:00 by PA")
 
@@ -42,7 +42,9 @@
                                                (if (WCD.ValidURLP URL)
                                                    then (SETQ ValidURLP T)
                                                  else (NCP.PrintMsg MainWindow NIL (CHARACTER 13)
-                                                             "Invalid URL, try again."
+                                                             URL
+                                                             (CHARACTER 13)
+                                                             "is an invalid URL, try again."
                                                              (CHARACTER 13)))
        finally (RETURN URL])
 
@@ -175,8 +177,8 @@
 
 (PUTPROPS Web LinkIconLeftButtonFn WCD.TraverseWebLink)
 (DECLARE%: DONTCOPY
-  (FILEMAP (NIL (812 8715 (WCD.AskURL 822 . 2310) (WCD.CreateWebCardType 2312 . 2779) (
-WCD.EditURLMenuCmd 2781 . 3248) (WCD.InitWebCard 3250 . 3910) (WCD.MakeWebCard 3912 . 5078) (
-WCD.TraverseWebLink 5080 . 6219) (WCD.UpdateCardText 6221 . 6941) (WCD.ValidURLP 6943 . 8017) (
-WCD.VisitURL 8019 . 8385) (WCD.VisitURLMenuCmd 8387 . 8713)))))
+  (FILEMAP (NIL (812 8862 (WCD.AskURL 822 . 2457) (WCD.CreateWebCardType 2459 . 2926) (
+WCD.EditURLMenuCmd 2928 . 3395) (WCD.InitWebCard 3397 . 4057) (WCD.MakeWebCard 4059 . 5225) (
+WCD.TraverseWebLink 5227 . 6366) (WCD.UpdateCardText 6368 . 7088) (WCD.ValidURLP 7090 . 8164) (
+WCD.VisitURL 8166 . 8532) (WCD.VisitURLMenuCmd 8534 . 8860)))))
 STOP

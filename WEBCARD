@@ -1,12 +1,12 @@
 (DEFINE-FILE-INFO PACKAGE "INTERLISP" READTABLE "INTERLISP" BASE 10)
 
-(FILECREATED "13-Oct-2024 19:00:15" {DSK}<home>paolo>il>webcard>WEBCARD.;18 8973   
+(FILECREATED "14-Oct-2024 11:55:42" {DSK}<home>paolo>il>webcard>WEBCARD.;19 9124   
 
       :EDIT-BY "PA"
 
-      :CHANGES-TO (FNS WCD.AskURL)
+      :CHANGES-TO (FNS WCD.CreateWebCardType)
 
-      :PREVIOUS-DATE "13-Oct-2024 18:01:00" {DSK}<home>paolo>il>webcard>WEBCARD.;17)
+      :PREVIOUS-DATE "13-Oct-2024 19:00:15" {DSK}<home>paolo>il>webcard>WEBCARD.;18)
 
 
 (PRETTYCOMPRINT WEBCARDCOMS)
@@ -49,11 +49,13 @@
        finally (RETURN URL])
 
 (WCD.CreateWebCardType
-  [LAMBDA NIL                                                (* ; "Edited  1-Oct-2024 17:35 by PA")
+  [LAMBDA NIL                                                (* ; "Edited 14-Oct-2024 11:55 by PA")
+                                                             (* ; "Edited  1-Oct-2024 17:35 by PA")
                                                              (* Define the new card type Web that 
                                                              inherits from Text.)
     (NCP.CreateCardType 'Web 'Text '((MakeFn WCD.MakeWebCard))
-           `((LinkAnchorModesSupported NIL)
+           `((DefaultHeight 70)
+             (LinkAnchorModesSupported NIL)
              (DisplayedInMenuFlg T])
 
 (WCD.EditURLMenuCmd
@@ -177,8 +179,8 @@
 
 (PUTPROPS Web LinkIconLeftButtonFn WCD.TraverseWebLink)
 (DECLARE%: DONTCOPY
-  (FILEMAP (NIL (812 8862 (WCD.AskURL 822 . 2457) (WCD.CreateWebCardType 2459 . 2926) (
-WCD.EditURLMenuCmd 2928 . 3395) (WCD.InitWebCard 3397 . 4057) (WCD.MakeWebCard 4059 . 5225) (
-WCD.TraverseWebLink 5227 . 6366) (WCD.UpdateCardText 6368 . 7088) (WCD.ValidURLP 7090 . 8164) (
-WCD.VisitURL 8166 . 8532) (WCD.VisitURLMenuCmd 8534 . 8860)))))
+  (FILEMAP (NIL (823 9013 (WCD.AskURL 833 . 2468) (WCD.CreateWebCardType 2470 . 3077) (
+WCD.EditURLMenuCmd 3079 . 3546) (WCD.InitWebCard 3548 . 4208) (WCD.MakeWebCard 4210 . 5376) (
+WCD.TraverseWebLink 5378 . 6517) (WCD.UpdateCardText 6519 . 7239) (WCD.ValidURLP 7241 . 8315) (
+WCD.VisitURL 8317 . 8683) (WCD.VisitURLMenuCmd 8685 . 9011)))))
 STOP

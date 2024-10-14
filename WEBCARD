@@ -1,20 +1,21 @@
 (DEFINE-FILE-INFO PACKAGE "INTERLISP" READTABLE "INTERLISP" BASE 10)
 
-(FILECREATED "14-Oct-2024 11:55:42" {DSK}<home>paolo>il>webcard>WEBCARD.;19 9124   
+(FILECREATED "14-Oct-2024 13:55:18" {DSK}<home>paolo>il>webcard>WEBCARD.;20 9638   
 
       :EDIT-BY "PA"
 
-      :CHANGES-TO (FNS WCD.CreateWebCardType)
+      :CHANGES-TO (FNS WCD.MakeWebCard WCD.InitCard)
+                  (VARS WEBCARDCOMS)
 
-      :PREVIOUS-DATE "13-Oct-2024 19:00:15" {DSK}<home>paolo>il>webcard>WEBCARD.;18)
+      :PREVIOUS-DATE "14-Oct-2024 11:55:42" {DSK}<home>paolo>il>webcard>WEBCARD.;19)
 
 
 (PRETTYCOMPRINT WEBCARDCOMS)
 
 (RPAQQ WEBCARDCOMS ((* A NoteCards extension for visiting websites.)
-                    (FNS WCD.AskURL WCD.CreateWebCardType WCD.EditURLMenuCmd WCD.InitWebCard 
-                         WCD.MakeWebCard WCD.TraverseWebLink WCD.UpdateCardText WCD.ValidURLP 
-                         WCD.VisitURL WCD.VisitURLMenuCmd)
+                    (FNS WCD.AskURL WCD.CreateWebCardType WCD.EditURLMenuCmd WCD.InitCard 
+                         WCD.InitWebCard WCD.MakeWebCard WCD.TraverseWebLink WCD.UpdateCardText 
+                         WCD.ValidURLP WCD.VisitURL WCD.VisitURLMenuCmd)
                     (P (WCD.InitWebCard))
                     (PROP LinkIconLeftButtonFn Web)))
 
@@ -69,6 +70,16 @@
           (NCP.CardProp Card 'URL URL)
           (WCD.UpdateCardText Card URL])
 
+(WCD.InitCard
+  [LAMBDA (Card Title URL NoDisplayFlg)                      (* ; "Edited 14-Oct-2024 13:50 by PA")
+                                                             (* Initialize new card of type Web by 
+                                                             setting Title and URL.
+                                                             Returns Card.)
+    (NCP.CardProp Card 'URL URL)
+    (NCP.CardTitle Card (OR Title "Untitled"))
+    (WCD.UpdateCardText Card URL)
+    Card])
+
 (WCD.InitWebCard
   [LAMBDA NIL                                                (* ; "Edited 11-Oct-2024 18:22 by PA")
                                                              (* Initialize the Web card type.)
@@ -80,7 +91,8 @@
            'Top])
 
 (WCD.MakeWebCard
-  [LAMBDA (Card Title NoDisplayFlg)                          (* ; "Edited 12-Oct-2024 19:22 by PA")
+  [LAMBDA (Card Title NoDisplayFlg)                          (* ; "Edited 14-Oct-2024 13:52 by PA")
+                                                             (* ; "Edited 12-Oct-2024 19:22 by PA")
                                                              (* ; "Edited  9-Oct-2024 14:08 by PA")
                                                              (* ; "Edited  3-Oct-2024 13:58 by PA")
                                                              (* ; "Edited  1-Oct-2024 17:51 by PA")
@@ -88,16 +100,14 @@
          (* Make a new card of type Web. Return the window of the new card if NoDisplayFlg 
          is non-NIL, and the ID if NoDisplayFlg is NIL.)
 
-    (if (NOT NoDisplayFlg)
-        then (LET* ((Window (NCP.ApplySuperTypeFn MakeFn Card Card Title NoDisplayFlg))
-                    (URL (WCD.AskURL Window)))
-                   (NCP.CardProp Card 'URL URL)
-                   (NCP.CardTitle Card "Untitled")
-                   (WCD.UpdateCardText Card URL)
-                   Window)
-      else (NCP.CardProp Card 'URL (WCD.AskURL))             (* TODO More Text card initialization 
-                                                             here.)
-           Card])
+    (LET* [(Window (NCP.ApplySuperTypeFn MakeFn Card Card Title NoDisplayFlg))
+           (URL (WCD.AskURL (if NoDisplayFlg
+                                then NIL
+                              else Window]
+          (WCD.InitCard Card Title URL NoDisplayFlg)
+          (if (NOT NoDisplayFlg)
+              then Window
+            else Card])
 
 (WCD.TraverseWebLink
   [LAMBDA (Card Window)                                      (* ; "Edited 13-Oct-2024 10:55 by PA")
@@ -179,8 +189,8 @@
 
 (PUTPROPS Web LinkIconLeftButtonFn WCD.TraverseWebLink)
 (DECLARE%: DONTCOPY
-  (FILEMAP (NIL (823 9013 (WCD.AskURL 833 . 2468) (WCD.CreateWebCardType 2470 . 3077) (
-WCD.EditURLMenuCmd 3079 . 3546) (WCD.InitWebCard 3548 . 4208) (WCD.MakeWebCard 4210 . 5376) (
-WCD.TraverseWebLink 5378 . 6517) (WCD.UpdateCardText 6519 . 7239) (WCD.ValidURLP 7241 . 8315) (
-WCD.VisitURL 8317 . 8683) (WCD.VisitURLMenuCmd 8685 . 9011)))))
+  (FILEMAP (NIL (880 9527 (WCD.AskURL 890 . 2525) (WCD.CreateWebCardType 2527 . 3134) (
+WCD.EditURLMenuCmd 3136 . 3603) (WCD.InitCard 3605 . 4131) (WCD.InitWebCard 4133 . 4793) (
+WCD.MakeWebCard 4795 . 5890) (WCD.TraverseWebLink 5892 . 7031) (WCD.UpdateCardText 7033 . 7753) (
+WCD.ValidURLP 7755 . 8829) (WCD.VisitURL 8831 . 9197) (WCD.VisitURLMenuCmd 9199 . 9525)))))
 STOP

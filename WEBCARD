@@ -1,13 +1,12 @@
 (DEFINE-FILE-INFO PACKAGE "INTERLISP" READTABLE "INTERLISP" BASE 10)
 
-(FILECREATED "14-Oct-2024 13:55:18" {DSK}<home>paolo>il>webcard>WEBCARD.;20 9638   
+(FILECREATED "14-Oct-2024 14:51:57" {DSK}<home>paolo>il>webcard>WEBCARD.;21 9863   
 
       :EDIT-BY "PA"
 
-      :CHANGES-TO (FNS WCD.MakeWebCard WCD.InitCard)
-                  (VARS WEBCARDCOMS)
+      :CHANGES-TO (FNS WCD.UpdateCardText)
 
-      :PREVIOUS-DATE "14-Oct-2024 11:55:42" {DSK}<home>paolo>il>webcard>WEBCARD.;19)
+      :PREVIOUS-DATE "14-Oct-2024 13:55:18" {DSK}<home>paolo>il>webcard>WEBCARD.;20)
 
 
 (PRETTYCOMPRINT WEBCARDCOMS)
@@ -131,16 +130,20 @@
              (WCD.VisitURL Card])
 
 (WCD.UpdateCardText
-  [LAMBDA (Card NewText)                                     (* ; "Edited 13-Oct-2024 16:59 by PA")
+  [LAMBDA (Card NewText)                                     (* ; "Edited 14-Oct-2024 14:47 by PA")
                                                              (* Replace the Card text with NewText.)
-    (LET ((TextStream (NCP.CardSubstance Card)))
+    (LET ((TextStream (NCP.CardSubstance Card))
+          (Window (NCP.WindowFromCard Card)))
 
          (* Set the card text to read-write, clear the existing text, insert the new text, 
          and make the text read only again,)
 
          (TEXTPROP TextStream 'READONLY NIL)                 (* Clear card text.)
          (TEDIT.DELETE TextStream 1 (TEDIT.NCHARS TextStream))
-         (NCP.CardAddText Card URL 'END)                     (* Make card text read only.)
+         (NCP.CardAddText Card URL 'END)                     (* If the card is displayed in a 
+                                                             window scroll it back to the top.)
+         (if Window
+             then (SCROLLW Window 0.0 0.0))                  (* Make card text read only.)
          (TEXTPROP TextStream 'READONLY T])
 
 (WCD.ValidURLP
@@ -189,8 +192,8 @@
 
 (PUTPROPS Web LinkIconLeftButtonFn WCD.TraverseWebLink)
 (DECLARE%: DONTCOPY
-  (FILEMAP (NIL (880 9527 (WCD.AskURL 890 . 2525) (WCD.CreateWebCardType 2527 . 3134) (
-WCD.EditURLMenuCmd 3136 . 3603) (WCD.InitCard 3605 . 4131) (WCD.InitWebCard 4133 . 4793) (
-WCD.MakeWebCard 4795 . 5890) (WCD.TraverseWebLink 5892 . 7031) (WCD.UpdateCardText 7033 . 7753) (
-WCD.ValidURLP 7755 . 8829) (WCD.VisitURL 8831 . 9197) (WCD.VisitURLMenuCmd 9199 . 9525)))))
+  (FILEMAP (NIL (833 9752 (WCD.AskURL 843 . 2478) (WCD.CreateWebCardType 2480 . 3087) (
+WCD.EditURLMenuCmd 3089 . 3556) (WCD.InitCard 3558 . 4084) (WCD.InitWebCard 4086 . 4746) (
+WCD.MakeWebCard 4748 . 5843) (WCD.TraverseWebLink 5845 . 6984) (WCD.UpdateCardText 6986 . 7978) (
+WCD.ValidURLP 7980 . 9054) (WCD.VisitURL 9056 . 9422) (WCD.VisitURLMenuCmd 9424 . 9750)))))
 STOP

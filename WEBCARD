@@ -1,22 +1,25 @@
 (DEFINE-FILE-INFO PACKAGE "INTERLISP" READTABLE "INTERLISP" BASE 10)
 
-(FILECREATED "15-Oct-2024 17:15:40" {DSK}<home>paolo>il>webcard>WEBCARD.;23 10511  
+(FILECREATED "22-Oct-2024 18:47:47" {DSK}<home>paolo>il>webcard>WEBCARD.;26 11178  
 
       :EDIT-BY "PA"
 
-      :CHANGES-TO (FNS WCD.TraverseWebLink)
+      :CHANGES-TO (VARS WEBCARDCOMS)
+                  (FNS WCD.CreateWebCardType)
 
-      :PREVIOUS-DATE "14-Oct-2024 17:18:08" {DSK}<home>paolo>il>webcard>WEBCARD.;22)
+      :PREVIOUS-DATE "22-Oct-2024 12:13:33" {DSK}<home>paolo>il>webcard>WEBCARD.;25)
 
 
 (PRETTYCOMPRINT WEBCARDCOMS)
 
-(RPAQQ WEBCARDCOMS ((* A NoteCards extension for visiting websites.)
-                    (FNS WCD.AskURL WCD.CreateWebCardType WCD.EditURLMenuCmd WCD.InitCard 
-                         WCD.InitWebCard WCD.MakeWebCard WCD.TraverseWebLink WCD.UpdateCardText 
-                         WCD.ValidURLP WCD.VisitURL WCD.VisitURLMenuCmd)
-                    (P (WCD.InitWebCard))
-                    (PROP LinkIconLeftButtonFn Web)))
+(RPAQQ WEBCARDCOMS
+       ((* A NoteCards extension for visiting websites.)
+        (FNS WCD.AskURL WCD.CreateWebCardType WCD.EditURLMenuCmd WCD.InitCard WCD.InitWebCard 
+             WCD.MakeWebCard WCD.TraverseWebLink WCD.UpdateCardText WCD.ValidURLP WCD.VisitURL 
+             WCD.VisitURLMenuCmd)
+        (BITMAPS (WCD.WebCardBitMap #*(21 18)OOOOOH@@OOOOOH@@OOOOOH@@OOOOOH@@H@@@@H@@H@G@@H@@HAJL@H@@HBJJ@H@@HGOO@H@@HEBE@H@@HGOO@H@@HEBE@H@@HGOO@H@@HBJJ@H@@HAJL@H@@H@G@@H@@H@@@@H@@OOOOOH@@
+                        ))
+        (P (WCD.InitWebCard))))
 
 
 
@@ -49,14 +52,19 @@
        finally (RETURN URL])
 
 (WCD.CreateWebCardType
-  [LAMBDA NIL                                                (* ; "Edited 14-Oct-2024 11:55 by PA")
+  [LAMBDA NIL                                                (* ; "Edited 22-Oct-2024 18:46 by PA")
+                                                             (* ; "Edited 21-Oct-2024 13:01 by PA")
+                                                             (* ; "Edited 14-Oct-2024 11:55 by PA")
                                                              (* ; "Edited  1-Oct-2024 17:35 by PA")
                                                              (* Define the new card type Web that 
                                                              inherits from Text.)
-    (NCP.CreateCardType 'Web 'Text '((MakeFn WCD.MakeWebCard))
+    (DECLARE (GLOBALVARS WCD.WebCardBitMap))
+    [NCP.CreateCardType 'Web 'Text '((MakeFn WCD.MakeWebCard))
            `((DefaultHeight 70)
              (LinkAnchorModesSupported NIL)
-             (DisplayedInMenuFlg T])
+             (DisplayedInMenuFlg T)
+             (LinkIconAttachedBitMap ,WCD.WebCardBitMap]
+    (PUTPROP 'Web 'LinkIconLeftButtonFn 'WCD.TraverseWebLink])
 
 (WCD.EditURLMenuCmd
   [LAMBDA (Window)                                           (* ; "Edited 12-Oct-2024 19:32 by PA")
@@ -195,12 +203,13 @@
     (WCD.VisitURL (NCP.CoerceToCard Window])
 )
 
-(WCD.InitWebCard)
+(RPAQ WCD.WebCardBitMap #*(21 18)OOOOOH@@OOOOOH@@OOOOOH@@OOOOOH@@H@@@@H@@H@G@@H@@HAJL@H@@HBJJ@H@@HGOO@H@@HEBE@H@@HGOO@H@@HEBE@H@@HGOO@H@@HBJJ@H@@HAJL@H@@H@G@@H@@H@@@@H@@OOOOOH@@
+)
 
-(PUTPROPS Web LinkIconLeftButtonFn WCD.TraverseWebLink)
+(WCD.InitWebCard)
 (DECLARE%: DONTCOPY
-  (FILEMAP (NIL (834 10400 (WCD.AskURL 844 . 2479) (WCD.CreateWebCardType 2481 . 3088) (
-WCD.EditURLMenuCmd 3090 . 3557) (WCD.InitCard 3559 . 4085) (WCD.InitWebCard 4087 . 4747) (
-WCD.MakeWebCard 4749 . 5844) (WCD.TraverseWebLink 5846 . 7289) (WCD.UpdateCardText 7291 . 8283) (
-WCD.ValidURLP 8285 . 9702) (WCD.VisitURL 9704 . 10070) (WCD.VisitURLMenuCmd 10072 . 10398)))))
+  (FILEMAP (NIL (997 10947 (WCD.AskURL 1007 . 2642) (WCD.CreateWebCardType 2644 . 3635) (
+WCD.EditURLMenuCmd 3637 . 4104) (WCD.InitCard 4106 . 4632) (WCD.InitWebCard 4634 . 5294) (
+WCD.MakeWebCard 5296 . 6391) (WCD.TraverseWebLink 6393 . 7836) (WCD.UpdateCardText 7838 . 8830) (
+WCD.ValidURLP 8832 . 10249) (WCD.VisitURL 10251 . 10617) (WCD.VisitURLMenuCmd 10619 . 10945)))))
 STOP

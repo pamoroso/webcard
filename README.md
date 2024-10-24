@@ -8,6 +8,8 @@ The project is one of the entrants of the [RetroChallenge 2024](https://www.retr
 
 WebCard is written in Interlisp as an extension of the [NoteCards](https://en.wikipedia.org/wiki/NoteCards) hypermedia system of [Medley Interlisp](https://interlisp.org).
 
+![A website opened by WebCard, a NoteCards extension for visiting websites.](https://raw.githubusercontent.com/pamoroso/webcard/main/webcard.png)
+
 
 ## Requirements and dependencies
 

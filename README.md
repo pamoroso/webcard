@@ -79,7 +79,7 @@ Closing a Web card discards the tracking information, so the next time link trav
 
 The file [`WCDEMO.NOTEFILE`](https://github.com/pamoroso/webcard/blob/main/WCDEMO.NOTEFILE) that comes with WebCard is a notefile with examples of Web cards filed into various types of cards such as Text cards and fileboxes. It contains some ready made Web cards to demonstrate what WebCard can do.
 
-To explore the demo notefile open it from NoteCards as usual and traverse the links in the Table of Contents.
+To use `WCDEMO.NOTEFILE` download it from the project repo, copy it to a file system location your Medley Interlisp installation has access to, load NoteCards, change to that location, and open the notefile. Then traverse the links in the Table of Contents for exploring the demo notefile.
 
 
 ## Learn more

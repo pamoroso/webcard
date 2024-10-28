@@ -1,13 +1,12 @@
 (DEFINE-FILE-INFO PACKAGE "INTERLISP" READTABLE "INTERLISP" BASE 10)
 
-(FILECREATED "22-Oct-2024 18:47:47" {DSK}<home>paolo>il>webcard>WEBCARD.;26 11178  
+(FILECREATED "28-Oct-2024 15:07:55" {DSK}<home>paolo>il>webcard>WEBCARD.;27 11375  
 
       :EDIT-BY "PA"
 
-      :CHANGES-TO (VARS WEBCARDCOMS)
-                  (FNS WCD.CreateWebCardType)
+      :CHANGES-TO (FNS WCD.VisitURL WCD.VisitURLMenuCmd)
 
-      :PREVIOUS-DATE "22-Oct-2024 12:13:33" {DSK}<home>paolo>il>webcard>WEBCARD.;25)
+      :PREVIOUS-DATE "22-Oct-2024 18:47:47" {DSK}<home>paolo>il>webcard>WEBCARD.;26)
 
 
 (PRETTYCOMPRINT WEBCARDCOMS)
@@ -185,20 +184,22 @@
            else NIL])
 
 (WCD.VisitURL
-  [LAMBDA (Card)                                             (* ; "Edited  9-Oct-2024 17:15 by PA")
+  [LAMBDA (Card)                                             (* ; "Edited 28-Oct-2024 15:04 by PA")
+                                                             (* ; "Edited  9-Oct-2024 17:15 by PA")
 
-         (* Visit the URL associated with Card. Commands the browser to of the host 
-         operating system to open the URL.)
+         (* Visit the URL associated with Card. Commands the browser of the host operating 
+         system to open the URL.)
 
     (LET [(URL (NCP.CardProp Card 'URL]
          (if URL
              then (ShellBrowse URL])
 
 (WCD.VisitURLMenuCmd
-  [LAMBDA (Window)                                           (* ; "Edited 11-Oct-2024 18:03 by PA")
+  [LAMBDA (Window)                                           (* ; "Edited 28-Oct-2024 15:07 by PA")
+                                                             (* ; "Edited 11-Oct-2024 18:03 by PA")
 
-         (* Visit the URL associated with the card when the user selects the relevant 
-         option of the card's left-click menu.)
+         (* Visit the URL associated with the card in Window when the user selects the 
+         relevant option of the card's left-click menu.)
 
     (WCD.VisitURL (NCP.CoerceToCard Window])
 )
@@ -208,8 +209,8 @@
 
 (WCD.InitWebCard)
 (DECLARE%: DONTCOPY
-  (FILEMAP (NIL (997 10947 (WCD.AskURL 1007 . 2642) (WCD.CreateWebCardType 2644 . 3635) (
-WCD.EditURLMenuCmd 3637 . 4104) (WCD.InitCard 4106 . 4632) (WCD.InitWebCard 4634 . 5294) (
-WCD.MakeWebCard 5296 . 6391) (WCD.TraverseWebLink 6393 . 7836) (WCD.UpdateCardText 7838 . 8830) (
-WCD.ValidURLP 8832 . 10249) (WCD.VisitURL 10251 . 10617) (WCD.VisitURLMenuCmd 10619 . 10945)))))
+  (FILEMAP (NIL (971 11144 (WCD.AskURL 981 . 2616) (WCD.CreateWebCardType 2618 . 3609) (
+WCD.EditURLMenuCmd 3611 . 4078) (WCD.InitCard 4080 . 4606) (WCD.InitWebCard 4608 . 5268) (
+WCD.MakeWebCard 5270 . 6365) (WCD.TraverseWebLink 6367 . 7810) (WCD.UpdateCardText 7812 . 8804) (
+WCD.ValidURLP 8806 . 10223) (WCD.VisitURL 10225 . 10696) (WCD.VisitURLMenuCmd 10698 . 11142)))))
 STOP

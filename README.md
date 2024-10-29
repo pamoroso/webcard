@@ -82,6 +82,11 @@ The file [`WCDEMO.NOTEFILE`](https://github.com/pamoroso/webcard/blob/main/WCDEM
 To use `WCDEMO.NOTEFILE` download it from the project repo, copy it to a file system location your Medley Interlisp installation has access to, load NoteCards, change to that location, and open the notefile. Then traverse the links in the Table of Contents for exploring the demo notefile.
 
 
+## Release history
+
+See the [list of releases](https://github.com/pamoroso/webcard/releases) for notes on the changes in each version.
+
+
 ## Learn more
 
 - [project blog](https://journal.paoloamoroso.com/tag:WebCard)
